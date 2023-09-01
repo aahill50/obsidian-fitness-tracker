@@ -2,9 +2,19 @@ import { WorkoutRepType, WorkoutRepTypeKeys } from '@types';
 import { gridColumnsStyle } from '@utils';
 import clsx from 'clsx';
 
-const RepData = ({ data }: { data: WorkoutRepType }) => {
-    const displayAsUnits = !!data.unit;
-    const content = displayAsUnits ? `${data.value}${data.unit}` : data;
+const RepData = ({ data }: { data: WorkoutRepType[WorkoutRepTypeKeys] }) => {
+    if (typeof data === 'undefined') {
+        return null;
+    }
+
+    let content = '';
+
+    if (typeof data === 'object') {
+        content = `${data.value}${data.unit}`;
+    } else {
+        content = data.toString();
+    }
+
     return (
         <div className={clsx('border-b', 'border-black', 'text-center')}>
             {content}
@@ -13,7 +23,7 @@ const RepData = ({ data }: { data: WorkoutRepType }) => {
 };
 
 export const WorkoutRep = ({ rep }: { rep: WorkoutRepType }) => {
-    const repTypes: WorkoutRepTypeKeys[] = Object.keys(rep);
+    const repTypes = Object.keys(rep) as WorkoutRepTypeKeys[];
     console.log('rep:', rep);
 
     return (
@@ -23,14 +33,9 @@ export const WorkoutRep = ({ rep }: { rep: WorkoutRepType }) => {
                 ...gridColumnsStyle(repTypes.length),
             }}
         >
-            {repTypes.map((repType) => {
-                const thisRep = rep[repType];
-                console.log('thisRep:', thisRep);
-                if (thisRep === undefined) {
-                    return null;
-                }
-                return <RepData data={thisRep} />;
-            })}
+            {repTypes.map((repType) => (
+                <RepData data={rep[repType]} />
+            ))}
         </div>
     );
 };
