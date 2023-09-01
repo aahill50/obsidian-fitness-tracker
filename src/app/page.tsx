@@ -28,8 +28,7 @@ export default function Home() {
                 for use with Obsidian
             </P>
             <P>
-                You'll be able to add your own exercises to track. You'll also
-                be able to track your progress over time
+                You will be able to add your own exercises and track your progress over time
             </P>
         </main>
     );

@@ -150,8 +150,8 @@ export default function Tracker() {
                 <div className='text-center'>Equipment Used (dropdown)</div>
                 <div className='text-center'>3</div>
             </div>
-            {userExercises.map((e) => (
-                <div className='mb-12'>
+            {userExercises.map((e, i) => (
+                <div className='mb-12' key={i}>
                     <div
                         className={clsx(
                             'mb-4',
@@ -167,10 +167,7 @@ export default function Tracker() {
                         {e.name} ({e.equipment})
                     </div>
                     <div
-                        className={clsx(
-                            'grid',
-                            'justify-around'
-                        )}
+                        className={clsx('grid', 'justify-around')}
                         style={{
                             ...gridColumnsStyle(e.repTypes.length),
                         }}
@@ -186,8 +183,8 @@ export default function Tracker() {
                     <div className={clsx('grid', 'grid-flow-row')}>
                         {[...e.workouts].map((w) => (
                             <>
-                                {w.reps.map((r) => (
-                                    <WorkoutRep rep={r} />
+                                {w.reps.map((r, i) => (
+                                    <WorkoutRep rep={r} key={i} />
                                 ))}
 
                                 {!w.notes ? null : (
@@ -202,9 +199,7 @@ export default function Tracker() {
                                 <span
                                     className={clsx(
                                         'font-bold',
-                                        // 'underline',
                                         'relative',
-                                        // '-left-4',
                                         'mt-2',
                                         'mb-6',
                                         'first:mt-0'

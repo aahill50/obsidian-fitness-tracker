@@ -33,8 +33,8 @@ export const WorkoutRep = ({ rep }: { rep: WorkoutRepType }) => {
                 ...gridColumnsStyle(repTypes.length),
             }}
         >
-            {repTypes.map((repType) => (
-                <RepData data={rep[repType]} />
+            {repTypes.map((repType, i) => (
+                <RepData key={i} data={rep[repType]} />
             ))}
         </div>
     );
