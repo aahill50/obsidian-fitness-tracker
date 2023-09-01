@@ -1,5 +1,5 @@
-import { WorkoutRepType, WorkoutRepTypeKeys } from '@/app/types';
-import { gridColumnsStyle } from '@/app/utils';
+import { WorkoutRepType, WorkoutRepTypeKeys } from '@types';
+import { gridColumnsStyle } from '@utils';
 import clsx from 'clsx';
 
 const RepData = ({ data }: { data: WorkoutRepType }) => {

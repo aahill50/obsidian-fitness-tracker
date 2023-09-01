@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { WorkoutRep } from './components/WorkoutRep';
-import { Exercise, EQUIPMENT, UNITS, WorkoutSet } from '../types';
-import { gridColumnsStyle } from '../utils';
+import { Exercise, EQUIPMENT, UNITS, WorkoutSet } from '@types';
+import { gridColumnsStyle } from '@utils';
 
 const equipmentDisplayLabel = {
     [EQUIPMENT.BODY_WEIGHT]: null,
