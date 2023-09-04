@@ -6,18 +6,12 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
+    provider = "postgresql"
     // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
     // Further reading:
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
-}
-
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
 }
 
 // Necessary for Next auth
@@ -55,6 +49,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    workouts      Workout[]
 }
 
 model VerificationToken {
@@ -63,4 +58,54 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Workout {
+    id        String     @id @default(cuid())
+    userId    String
+    exercises Exercise[]
+    notes     String
+    timestamp DateTime
+    user      User       @relation(fields: [userId], references: [id])
+}
+
+model Exercise {
+    id        String   @id @default(cuid())
+    userId    String
+    name      String
+    workoutId String?
+    reps      Rep[]
+    workout   Workout? @relation(fields: [workoutId], references: [id])
+}
+
+model Rep {
+    id         String   @id @default(cuid())
+    unitId     String
+    unitType   UnitType
+    exerciseId String
+    repAmount  Float
+    unitAmount Float
+    exercise   Exercise @relation(fields: [exerciseId], references: [id])
+}
+
+enum UnitType {
+    Distance
+    Time
+    Weight
+    Unitless
+}
+
+enum TimeRep {
+    SECOND
+    MINUTE
+    HOUR
+}
+
+enum WeightRep {
+    POUND
+    KILOGRAM
+}
+
+enum UnitlessRep {
+    REPETITION
 }
