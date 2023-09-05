@@ -5,7 +5,7 @@ import Link from "next/link";
 import { api } from "~/utils/api";
 
 export default function Home() {
-  const hello = "from tRPC";
+  const hello = { data: { greeting: "from tRPC" } };
 
   return (
     <>
