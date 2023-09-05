@@ -64,7 +64,7 @@ model Workout {
     id        String     @id @default(cuid())
     userId    String
     exercises Exercise[]
-    notes     String
+    notes     String?
     timestamp DateTime
     user      User       @relation(fields: [userId], references: [id])
 }
